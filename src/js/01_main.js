@@ -25,25 +25,6 @@ tabLinks[1].onclick = function() {
 const time = 2500;
 const counters = document.querySelectorAll('.count')
 
-let yearBtn = document.getElementById('year'),
-    monthBtn = document.getElementById('month'),
-    yearPrice = document.getElementById('year-p'),
-    monthPrice = document.getElementById('month-p');
-
-document.addEventListener('DOMContentLoaded', function() {
-    yearPrice.classList.add('active');
-    monthBlock.classList.remove('active');
-})
-
-yearBtn.addEventListener('click', function() {
-    yearPrice.classList.add('active');
-    monthPrice.classList.remove('active');
-})
-
-monthBlock.addEventListener('click', function() {
-    yearPrice.classList.remove('active');
-    monthPrice.classList.add('active');
-})
 
 function outNum(num, elem, steps) {
 
@@ -132,3 +113,144 @@ if (animItems.length > 0) {
         animOnScroll();
     }, 500);
 }
+
+//scroll to top 
+
+
+window.onload = () => {
+    const anchor = document.querySelector('.scroll-to-top')
+
+    anchor.addEventListener('click', function(e) {
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    })
+
+    window.onscroll = () => {
+        if (window.scrollY > 800) {
+            anchor.classList.remove('hide')
+        } else if (window.scrollY < 800) {
+            anchor.classList.add('hide')
+        }
+    }
+}
+const popupLinks = document.querySelectorAll('.popup-link');
+const body = document.querySelector('body');
+const lockPadding = document.querySelectorAll('.lock-padding');
+
+let unlock = true;
+
+const timeout = 800;
+
+if (popupLinks.length > 0) {
+    for (let i = 0; i < popupLinks.length; i++) {
+        const popupLink = popupLinks[i];
+        popupLink.addEventListener("click", function(e) {
+            const popupName = popupLink.getAttribute('href').replace('#', '');
+            const currentPopup = document.getElementById(popupName)
+            popupOpen(currentPopup)
+            e.preventDefault();
+        });
+    }
+}
+
+const popupCloseIcon = document.querySelectorAll('.popup__close')
+if (popupCloseIcon.length > 0) {
+    for (let i = 0; i < popupCloseIcon.length; i++) {
+        const el = popupCloseIcon[i]
+        el.addEventListener('click', function(e) {
+            popupClose(el.closest('.popup'));
+            e.preventDefault
+        });
+    }
+}
+
+function popupOpen(currentPopup) {
+    if (currentPopup && unlock) {
+        const popupActive = document.querySelector('.popup.open');
+        if (popupActive) {
+            popupClose(popupActive, false)
+        } else {
+            bodylock();
+        }
+        currentPopup.classList.add('open')
+        currentPopup.addEventListener('click', function(e) {
+            if (!e.target.closest('.popup__inner')) {
+                popupClose(e.target.closest('.popup'));
+            }
+        });
+    }
+}
+
+function popupClose(popupActive, doUnlock = true) {
+    if (unlock) {
+        popupActive.classList.remove('open')
+        if (doUnlock) {
+            bodyUnlock()
+        }
+    }
+}
+
+function bodylock() {
+    const l = window.innerWidth - document.querySelector('body').offsetWidth + 'px'
+    if (lockPadding.length < 0) {
+        for (let i = 0; i < lockPadding.length; i++) {
+            const el = lockPadding[i]
+            el.style.paddingRight = l;
+        }
+    }
+    body.style.paddingRight = l;
+    body.classList.add('lock')
+
+    unlock = false
+    setTimeout(function() {
+        unlock = true
+    }, timeout)
+}
+
+function bodyUnlock() {
+    setTimeout(function() {
+        if (lockPadding.length > 0) {
+            for (let i = 0; i < lockPadding.length; i++) {
+                const el = lockPadding[i]
+                el.style.paddingRight = '0px'
+            }
+        }
+        body.style.paddingRight = '0px'
+        body.classList.remove('lock')
+    }, timeout)
+    unlock = false
+    setTimeout(function() {
+        unlock = true
+    }, timeout)
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.which === 27) {
+        const popupActive = document.querySelector('.popup.open')
+        popupClose(popupActive)
+    }
+})
+
+
+
+(function() {
+    if (!Element.prototype.closest) {
+        Element.prototype.closest = function(css) {
+            var node = this;
+            while (node) {
+                if (node.matches(css)) return node;
+                else node = node.parentElement;
+            }
+            return null;
+        };
+    }
+})();
+(function() {
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.matchesSelector ||
+            Element.prototype.webkitMatchesSelector ||
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector;
+    }
+})();
