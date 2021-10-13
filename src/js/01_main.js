@@ -10,6 +10,8 @@ headerBg.onclick = function() {
     document.querySelector('.header__media-menu__btn').classList.remove('open');
     document.querySelector('.header__media-nav').classList.remove('open');
 }
+const yearPrice = document.querySelectorAll('.year-p')
+const monthPrice = document.querySelectorAll('.month-p')
 tabLinks[0].onclick = function() {
     tabLinks[1].classList.remove('active-btn')
     tabLinks[0].classList.add('active-btn')
@@ -19,22 +21,37 @@ tabLinks[1].onclick = function() {
         tabLinks[1].classList.add('active-btn')
     }
     // counter
-const elements = [
-    a = document.querySelector('.count1'),
-    b = document.querySelector('.count2'),
-    c = document.querySelector('.count3'),
-    d = document.querySelector('.count4'),
-    f = document.querySelector('.count5'),
-]
-const time = 2500;
-const step = 1;
 
-function outNum(num, elem) {
-    let e = elements[0];
-    n = 0;
-    let t = Math.round(time / (num / step));
+const time = 2500;
+const counters = document.querySelectorAll('.count')
+
+let yearBtn = document.getElementById('year'),
+    monthBtn = document.getElementById('month'),
+    yearPrice = document.getElementById('year-p'),
+    monthPrice = document.getElementById('month-p');
+
+document.addEventListener('DOMContentLoaded', function() {
+    yearPrice.classList.add('active');
+    monthBlock.classList.remove('active');
+})
+
+yearBtn.addEventListener('click', function() {
+    yearPrice.classList.add('active');
+    monthPrice.classList.remove('active');
+})
+
+monthBlock.addEventListener('click', function() {
+    yearPrice.classList.remove('active');
+    monthPrice.classList.add('active');
+})
+
+function outNum(num, elem, steps) {
+
+    let e = document.querySelector('#' + elem);
+    let n = 0;
+    let t = Math.round(time / (num / steps));
     let interval = setInterval(() => {
-        n = n + step;
+        n = n + steps;
         if (n == num) {
             clearInterval(interval);
         }
@@ -42,9 +59,8 @@ function outNum(num, elem) {
     }, t);
 }
 
-outNum(260, elements[0]);
-
-
+outNum(260, 'counter1', 1);
+outNum(260, 'counter2', 1);
 //fixed header
 
 
@@ -112,7 +128,7 @@ if (animItems.length > 0) {
     }
 
 
-    setTimeout(() => {
+    setInterval(() => {
         animOnScroll();
-    }, 0);
+    }, 500);
 }

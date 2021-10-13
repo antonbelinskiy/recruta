@@ -6,12 +6,40 @@
     display: none !important;
 }
 
+.year-p {
+    display: none;
+}
+
+.year-p.active {
+    display: block;
+}
+
+.month-p {
+    display: none;
+}
+
+.month-p.active {
+    display: block;
+}
+
 .anim_item {
     opacity: 0;
     transition: 1s;
     &._active {
         opacity: 1;
     }
+}
+
+.notification__btn {
+    cursor: default !important;
+}
+
+.count {
+    opacity: 1 !important;
+}
+
+.supervisor__info .supervisor__info-position {
+    margin-bottom: 10px;
 }
 
 .round1 {
@@ -853,6 +881,7 @@ header {
     }
 }
 
+._active .supervisor__quote,
 ._active .notification {
     transform: scale(1);
 }
@@ -961,20 +990,35 @@ header {
         transition: .3s all;
         display: inline-block;
         color: $blue;
+        position: relative;
         font-size: 2rem;
-        margin-right: 6.3rem;
+        margin-right: 3.3rem;
         border: 0;
         line-height: 30px;
-        padding: 2px 0 0 0;
         cursor: pointer;
-        border-bottom: 1px dashed $blue;
         background-color: transparent;
+        padding: 1.5rem 3rem;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 1px;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            border-bottom: 1px dashed $blue;
+        }
+        &:last-of-type {
+            margin-right: 0;
+        }
         &.active-btn {
             color: #fff;
             background-color: $blue;
-            padding: 1.5rem 3rem;
             border-radius: 15px;
-            border-bottom: 0;
+        }
+        &.active.btn::after {
+            content: none;
         }
     }
 }
@@ -1284,7 +1328,7 @@ header {
         position: absolute;
         bottom: 0;
         top: 10px;
-        left: 36%;
+        left: 14px;
     }
 }
 
@@ -1298,6 +1342,7 @@ header {
     padding: 17px 43px 23px 32px;
     .steps__card-num::before {
         content: '2';
+        left: 13px;
     }
 }
 
@@ -1305,6 +1350,7 @@ header {
     grid-area: 1 / 2 / 9 / 3;
     .steps__card-num::before {
         content: '3';
+        left: 13px;
     }
 }
 
@@ -1358,6 +1404,7 @@ header {
 }
 
 .prediction__inner {
+    overflow: hidden;
     padding: 9.5rem 8rem 10rem 8rem;
     margin: 0 auto;
     max-width: 1440px;
@@ -1413,6 +1460,10 @@ header {
 }
 
 .supervisor__quote {
+    opacity: 1 !important;
+    transform: scale(0);
+    transition: 1s;
+    transition-delay: 1.2s;
     max-width: 360px;
     padding: 3rem;
     position: absolute;
@@ -1429,13 +1480,26 @@ header {
 
 .supervisor__info {
     padding-top: 4rem;
+    line-height: 20px;
     &>* {
         margin-bottom: 2rem;
     }
     ul {
-        padding-left: 2rem;
         li {
-            margin-bottom: 1rem;
+            margin-bottom: 0;
+            list-style: none;
+            text-indent: 20px;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                left: 10px;
+                top: 8px;
+                height: 4px;
+                width: 4px;
+                background-color: $black;
+                border-radius: 50%;
+            }
         }
     }
 }
@@ -1449,7 +1513,7 @@ header {
 }
 
 .supervisor__info-text {
-    margin-bottom: 3rem;
+    margin-bottom: 0;
 }
 
 .footer {
@@ -1487,6 +1551,9 @@ header {
                     transition: .3s;
                 }
             }
+            &:last-of-type {
+                margin-right: 0;
+            }
             &:hover {
                 background: $blue;
             }
@@ -1502,14 +1569,14 @@ header {
 }
 
 .footer__bottom {
-    .footer__bottom-inner {
-        max-width: 1440px;
-        padding: 0px 80px;
-    }
+    max-width: 1440px;
+    padding: 1.5rem 8rem;
     font-size: 1.2rem;
     color: #7A7A7A;
     background: #E8EDF3;
-    padding: 1.5rem 4rem;
+    .footer__bottom-inner {
+        margin-right: 2.7rem;
+    }
     a {
         font-size: 1rem;
         color: #7A7A7A;
@@ -1522,7 +1589,7 @@ header {
 
 @media (max-width:1380px) {
     .advantages__card {
-        width: 49%;
+        width: 47%;
         margin-bottom: 2rem;
     }
     header {
@@ -1531,6 +1598,18 @@ header {
     header.fixed {
         .header__desc {
             display: none;
+        }
+    }
+    .advantages__cards {
+        justify-content: center;
+        .advantages__card {
+            margin-right: 0;
+            &:nth-child(1) {
+                margin-right: 30px;
+            }
+            &:nth-child(3) {
+                margin-right: 30px;
+            }
         }
     }
     .advantages__card-icon {
@@ -1609,6 +1688,9 @@ header {
     .media {
         display: block !important;
     }
+    .intro .intro__subtitle {
+        max-width: none;
+    }
     .wrapper {
         overflow: hidden;
     }
@@ -1682,13 +1764,10 @@ header {
         position: absolute;
         right: 0;
         left: 0;
-        top: inherit;
+        top: 176px;
         width: fit-content;
         margin: auto;
-        opacity: .7;
-    }
-    .footer {
-        margin-bottom: 10px;
+        opacity: .4 !important;
     }
     .main {
         margin-top: 50px;
@@ -1800,6 +1879,15 @@ header {
         max-width: 48%;
         margin-right: 0;
     }
+    .prediction__inner .prediction__title {
+        line-height: 30px;
+    }
+    .steps svg {
+        display: none;
+    }
+    .intro .intro__subtitle {
+        margin-bottom: 15px;
+    }
     .supervisor__image {
         margin-right: 4rem;
     }
@@ -1880,8 +1968,10 @@ header {
         text-align: center;
         ul {
             text-align: left;
-            padding-left: 40px;
         }
+    }
+    .supervisor {
+        margin-bottom: 7rem;
     }
     .supervisor__image {
         width: 400px;
@@ -1970,12 +2060,34 @@ header {
     .advantages__card-icon {
         background-position: left;
     }
+    .advantages__cards .advantages__card {
+        margin-right: 0;
+        &:nth-child(1) {
+            margin-right: 0;
+        }
+        &:nth-child(3) {
+            margin-right: 0;
+        }
+    }
+    .team__title {
+        line-height: 30px;
+    }
+    .agitation__subtitle {
+        max-width: none;
+        margin-right: 0 !important;
+    }
     .intro .intro__title,
     .team__title,
     .tariffs__title,
     .agitation__title,
     .prediction__title {
         font-size: 24px;
+    }
+    .tariffs__tabs button.tariffs__tab {
+        font-size: 12px;
+    }
+    .tariffs__tabs button.tariffs__tab.active-btn {
+        padding: 10px 20px;
     }
     .tariff__info-price {
         font-size: 18px;
@@ -2062,13 +2174,16 @@ header {
     .footer__bottom-left {
         max-width: 230px;
         text-align: center;
-        line-height: 20px;
+        line-height: 24px;
     }
     .footer__bottom {
         padding: 2.5rem 4rem;
         a {
             margin-right: 0;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            &:nth-child(3) {
+                margin-bottom: 0;
+            }
         }
     }
     .footer__inner,
@@ -2133,9 +2248,31 @@ header {
     .team__card-text {
         line-height: 15px;
     }
+    .agitation__card {
+        text-align: center;
+    }
+    .advatages__card-title,
+    .support__title,
+    .support__card-title,
+    .agitation__card-title,
+    .steps__card-title {
+        font-size: 14px;
+    }
+    .supervisor__image {
+        transition-delay: 1s;
+    }
+    .agitation__card-text span .advatages__card-text,
+    .agitation__card-desc,
+    .agitation__card-text ul,
+    .steps__card-text {
+        font-size: 12px;
+    }
     .agitation__image {
         width: 228px;
         height: 216px;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
     .agitation__card-image {
         margin-right: 0;
@@ -2182,9 +2319,6 @@ header {
     .supervisor__quote {
         font-size: 12px;
     }
-    .supervisor__info-text {
-        margin-bottom: 10px;
-    }
     .supervisor__info {
         text-align: left;
     }
@@ -2204,16 +2338,24 @@ header {
             }
         }
     }
+    .prediction__inner .prediction__title {
+        max-width: 180px;
+    }
     .supervisor__quote {
         max-width: 258px;
     }
     .agitation__title {
-        max-width: 250px;
+        max-width: 200px;
         margin: 0 auto 20px auto;
     }
     .tariffs__title,
     .tariffs__subtitle {
         margin-bottom: 1rem;
+    }
+    .agitation__image {
+        left: 0;
+        right: 0;
+        margin: auto;
     }
     .steps__card-btn {
         padding: 2rem 3rem;
@@ -2233,7 +2375,7 @@ header {
         padding: 35px 65px;
     }
     .advantages__content-phone {
-        transform: translateX(-21px);
+        transform: translateX(-21px) !important;
     }
     .advantages__content-info:nth-child(3) {
         padding-top: 0;
