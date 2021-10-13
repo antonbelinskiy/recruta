@@ -45,9 +45,7 @@ outNum(260, 'counter2', 1);
 //fixed header
 
 
-window.onscroll = function() {
-    scrollFunction();
-};
+
 
 function scrollFunction() {
     let scrollPos = 150;
@@ -132,6 +130,7 @@ window.onload = () => {
         } else if (window.scrollY < 800) {
             anchor.classList.add('hide')
         }
+        scrollFunction();
     }
 }
 const popupLinks = document.querySelectorAll('.popup-link');
@@ -205,7 +204,7 @@ function bodylock() {
     unlock = false
     setTimeout(function() {
         unlock = true
-    }, timeout)
+    }, 500)
 }
 
 function bodyUnlock() {
@@ -222,7 +221,7 @@ function bodyUnlock() {
     unlock = false
     setTimeout(function() {
         unlock = true
-    }, timeout)
+    }, 500)
 }
 
 document.addEventListener('keydown', function(e) {
