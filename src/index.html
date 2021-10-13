@@ -1,9 +1,9 @@
 <!DOCTYPE html> @@include('components/page-blocks/_head.html',{ "lang":"ru", "title":"ILC Recruta", "description":"", "keywords":"", "favicon":"img/favicons/favicon", })
 
-<body>
+<body id="body">
     @@include('components/page-blocks/_header.html')
     <div class="wrapper">
-        <main class="main ">
+        <main class="main">
             <section class="intro">
                 <div class="intro__inner">
                     <div class="intro__information">
@@ -13,7 +13,7 @@
                         <h2 class="intro__subtitle anim_item anim__slide-r">
                             Ваша личная команда профессиональных юристов, которая всегда под рукой. А также доступ к бонусам партнерской программы — доход <br> до $260 с каждого полиса, купленного по вашему приглашению.
                         </h2>
-                        <a class="button login__btn anim_item anim__slide-r" href="#">Попробовать бесплатно</a>
+                        <a class="button popup-link login__btn anim_item anim__slide-r" href="#popup1">Попробовать бесплатно</a>
                     </div>
                     <div class="intro__image anim_item">
                         <svg class="light__particle round1" width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,20 +216,12 @@
                         <div class="advantages__content-phone anim__slide-t">
                             <img class="phone__image" src="./img/phoneb.svg" alt="phone">
                             <div class="phone__gif">
-                                <picture>
-                                    <source srcset="./img/phonegif.webp" type="image/webp">
-                                    <img src="./img/phonegif.png" alt="Phone">
-                                </picture>
+                                <img src="./img/phonegif.gif" alt="Phone">
                             </div>
                             <p class="phone__text">sirius</p>
                             <div class="notification _no_hide anim_item">
                                 <div class="notification__inner">
-                                    <div class="notification__text">
-                                        Чем могу вам помочь?
-                                    </div>
-                                    <span class="notification__btn button">
-                  Задайте вопрос
-                                    </span>
+                                    <img src="./img/notification.svg" alt="Юридический Полис">
                                 </div>
                             </div>
                         </div>
@@ -258,7 +250,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="advantages__cards anim_item">
+                    <div class="advantages__cards _no_hide anim_item">
                         <div class="advantages__card card anim__slide-t">
                             <div class="advantages__card-icon --svg__chat-icon1"></div>
                             <div class="advatages__card-title -bold">Удобный <br> формат </div>
@@ -299,8 +291,10 @@
         @@include('components/bem-blocks/_supervisor.html')
     </div>
     </main>
-    <!-- <button onclick="topFunction()" id="topBtn" title="Go to top"><svg aria-hidden="true" height="24" width="10" focusable="false" data-prefix="fas" data-icon="arrow-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-down fa-w-14 fa-2x"><path fill="#000" d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z" class=""></path></svg></button> -->
-    @@include('components/page-blocks/_footer.html') @@include('components/page-blocks/_scripts.html')
+    <div>
+        <a class="scroll-to-top hide"><svg width="15" height="30" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-arrow-up fa-w-14 fa-2x"><path fill="#273895" d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z" class=""></path></svg></a>
+    </div>
+    @@include('components/page-blocks/_footer.html') @@include('components/page-blocks/_popup.html') @@include('components/page-blocks/_scripts.html')
 
 </body>
 

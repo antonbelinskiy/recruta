@@ -6,6 +6,140 @@
     display: none !important;
 }
 
+.popup {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    transition: .5s all;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    background: rgba(225, 225, 225, 0.56);
+    cursor: pointer;
+    &__body {
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 20px;
+    }
+    &__inner {
+        cursor: default;
+        transform: translateY(110%);
+        opacity: 0;
+        transition: .5s all;
+        position: relative;
+        background: #F4F7FA;
+        box-shadow: 0px 4px 100px rgba(208, 218, 227, 0.57);
+        border-radius: 10px;
+        max-width: 672px;
+        max-height: 388px;
+        padding: 65px 135px;
+        text-align: center;
+    }
+    &__title {
+        font-size: 24px;
+        line-height: 30px;
+        color: #262626;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+    &__form {
+        max-width: 300px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        input {
+            width: 100%;
+            background-color: #FEFEFE;
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            border: 1px solid #E4E4E4;
+            color: #303030;
+            font-size: 14px;
+            padding: 13px 30px 13px 45px;
+            border-radius: 10px;
+            position: relative;
+            outline: $blue;
+            margin-bottom: 8px;
+            &:last-of-type {
+                margin-bottom: 25px;
+            }
+            &:focus::placeholder {
+                opacity: .4;
+            }
+            &::placeholder {
+                color: #303030;
+            }
+        }
+    }
+    &__close path {
+        transition: .3s all;
+    }
+    &__close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        &:hover path {
+            fill: $blue;
+        }
+    }
+}
+
+.scroll-to-top {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border: 3px solid $blue;
+    transition: .3;
+    visibility: visible;
+    opacity: 1;
+    z-index: 999;
+    cursor: pointer;
+    &:hover {
+        background-color: $blue;
+        border-color: #fff;
+    }
+    &:hover svg path {
+        fill: #fff;
+    }
+    &.hide {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+body.lock {
+    overflow: hidden;
+}
+
+.popup.open {
+    opacity: 1;
+    visibility: visible;
+    .popup__inner {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.popup-btn {
+    padding: 15px 35px;
+}
+
 .year-p {
     display: none;
 }
@@ -28,10 +162,6 @@
     &._active {
         opacity: 1;
     }
-}
-
-.notification__btn {
-    cursor: default !important;
 }
 
 .count {
@@ -604,9 +734,10 @@ header {
 }
 
 .team__info-card {
+    border-radius: 10px;
     padding: 2.5rem 3rem 2.5rem 3.4rem;
     max-width: 217px;
-    margin-right: 2.8rem;
+    margin-right: 2rem;
     margin-bottom: 1.8rem;
     .team__card-title {
         font-weight: 700;
@@ -717,6 +848,7 @@ header {
     background: #fff;
     max-width: 343px;
     padding: 3rem;
+    border-radius: 10px;
 }
 
 .support__card:nth-child(1) {
@@ -859,26 +991,31 @@ header {
     box-shadow: 0px 13.5277px 39.7872px rgba(187, 166, 255, 0.78);
     border-radius: 11.9362px;
     &__inner {
-        padding: 22px 22px 14px 22px;
-    }
-    &__text {
-        margin-bottom: .7rem;
-        font-size: 1.2rem;
-        color: #000;
-        font-weight: 700;
         text-align: center;
+        padding: 30px 25px;
     }
-    &__btn {
-        background: linear-gradient(326.06deg, #2641D1 11.53%, #3333A3 74.32%);
-        padding: 1.5rem 2.2rem;
-        font-size: 1.2rem;
-        font-weight: 400;
-        border-radius: 10px;
-        &:hover {
-            background: linear-gradient(326.06deg, #2641D1 11.53%, #3333A3 74.32%);
-            transform: none;
-        }
+    img {
+        width: 169px;
+        height: 43px;
     }
+    // &__text {
+    //     margin-bottom: .7rem;
+    //     font-size: 1.2rem;
+    //     color: #000;
+    //     font-weight: 700;
+    //     text-align: center;
+    // }
+    // &__btn {
+    //     background: linear-gradient(326.06deg, #2641D1 11.53%, #3333A3 74.32%);
+    //     padding: 1.5rem 2.2rem;
+    //     font-size: 1.2rem;
+    //     font-weight: 400;
+    //     border-radius: 10px;
+    //     &:hover {
+    //         background: linear-gradient(326.06deg, #2641D1 11.53%, #3333A3 74.32%);
+    //         transform: none;
+    //     }
+    // }
 }
 
 ._active .supervisor__quote,
@@ -990,6 +1127,7 @@ header {
         transition: .3s all;
         display: inline-block;
         color: $blue;
+        border-radius: 15px;
         position: relative;
         font-size: 2rem;
         margin-right: 3.3rem;
@@ -997,7 +1135,7 @@ header {
         line-height: 30px;
         cursor: pointer;
         background-color: transparent;
-        padding: 1.5rem 3rem;
+        padding: 1rem 2.9rem;
         &::after {
             content: '';
             position: absolute;
@@ -1015,7 +1153,6 @@ header {
         &.active-btn {
             color: #fff;
             background-color: $blue;
-            border-radius: 15px;
         }
         &.active.btn::after {
             content: none;
@@ -1081,6 +1218,7 @@ header {
 }
 
 .tariff__info-link {
+    font-weight: 600;
     color: #2741D0;
     font-size: 1.6rem;
     margin-bottom: 3rem;
@@ -1127,6 +1265,7 @@ header {
         margin-bottom: 24px;
     }
     .tariff__info-subtitle {
+        font-weight: 600;
         margin-bottom: 1rem;
     }
     ul {
@@ -1202,7 +1341,7 @@ header {
 }
 
 .agitation__card:last-of-type {
-    margin-bottom: 1.7rem;
+    margin-bottom: 3rem;
 }
 
 .agitation__card-image {
@@ -1215,6 +1354,10 @@ header {
         width: 100%;
         height: 100%;
     }
+}
+
+.agitation__card:last-of-type .agitation__card-image {
+    height: 159px;
 }
 
 .agitation__card-title {
@@ -1533,11 +1676,16 @@ header {
     align-items: center;
 }
 
+.footer__bottom-right {
+    a:nth-child(2) {
+        margin-right: 0;
+    }
+}
+
 .footer__rightside {
     .footer__socials {
         width: 172px;
         justify-content: space-between;
-        margin-right: 2.7rem;
         a {
             width: 36px;
             height: 36px;
@@ -1569,13 +1717,13 @@ header {
 }
 
 .footer__bottom {
-    max-width: 1440px;
-    padding: 1.5rem 8rem;
     font-size: 1.2rem;
     color: #7A7A7A;
     background: #E8EDF3;
     .footer__bottom-inner {
-        margin-right: 2.7rem;
+        max-width: 1440px;
+        padding: 1.5rem 8rem;
+        margin: 0 auto;
     }
     a {
         font-size: 1rem;
@@ -1611,6 +1759,9 @@ header {
                 margin-right: 30px;
             }
         }
+    }
+    .prediction {
+        margin-bottom: 7rem;
     }
     .advantages__card-icon {
         background-position: center;
@@ -1677,8 +1828,7 @@ header {
         padding: 2rem;
     }
     .footer__bottom .footer__bottom-inner {
-        width: auto;
-        padding: 0;
+        padding: 1.5rem 4rem;
     }
     .agitation {
         background-size: cover;
@@ -1695,12 +1845,12 @@ header {
         overflow: hidden;
     }
     .header__media-nav {
-        min-width: 48%;
+        min-width: 250px;
         right: -130%;
         top: 40%;
         z-index: 228;
         position: fixed;
-        transition: .4s ease-in-out;
+        transition: .3s ease-in-out;
         background: #fff;
         padding: 2rem;
         border-radius: 15px;
@@ -1712,6 +1862,9 @@ header {
         li {
             margin-bottom: 1rem;
             list-style: none;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
             a {
                 font-size: 1.6rem;
             }
@@ -1764,7 +1917,7 @@ header {
         position: absolute;
         right: 0;
         left: 0;
-        top: 176px;
+        top: 222px;
         width: fit-content;
         margin: auto;
         opacity: .4 !important;
@@ -1858,7 +2011,7 @@ header {
 @media (max-width: 991px) {
     .steps__card-btn {
         font-size: 1.4rem;
-        padding: 1rem 2rem;
+        padding: 1.8rem 3.7rem;
     }
     .steps__inner {
         max-height: none;
@@ -1869,6 +2022,10 @@ header {
     }
     .steps__inner-card {
         max-width: 49%;
+    }
+    .team__cards-row {
+        width: 100%;
+        justify-content: center;
     }
     .advantages__content {
         margin-bottom: 20px;
@@ -1965,10 +2122,12 @@ header {
 @media (max-width: 772px) {
     .supervisor__inner {
         flex-direction: column-reverse;
-        text-align: center;
         ul {
             text-align: left;
         }
+    }
+    .popup__inner {
+        padding: 62px 70px;
     }
     .supervisor {
         margin-bottom: 7rem;
@@ -2003,10 +2162,34 @@ header {
         }
     }
     .agitation__card {
+        text-align: center;
         flex-direction: column;
         align-items: center;
         .agitation__card-image {
             margin-bottom: 2rem;
+        }
+        ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-left: 0;
+            text-align: center;
+            li {
+                list-style: none;
+                text-indent: 20px;
+                position: relative;
+                width: fit-content;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 10px;
+                    top: 8px;
+                    height: 4px;
+                    width: 4px;
+                    background-color: $black;
+                    border-radius: 50%;
+                }
+            }
         }
     }
     .steps__inner-card {
@@ -2054,6 +2237,13 @@ header {
     .advantages__content-info:nth-child(3) {
         padding-top: 2rem;
     }
+    .popup__title {
+        font-size: 22px;
+        line-height: 20px;
+    }
+    .popup__inner {
+        padding: 60px 25px;
+    }
     .advantages__card {
         width: 100%;
     }
@@ -2083,11 +2273,21 @@ header {
     .prediction__title {
         font-size: 24px;
     }
+    .tariff__info-item {
+        br {
+            display: none;
+        }
+    }
+    .tariff__info-subtitle {
+        font-size: 14px;
+        font-weight: 600;
+    }
     .tariffs__tabs button.tariffs__tab {
         font-size: 12px;
     }
     .tariffs__tabs button.tariffs__tab.active-btn {
-        padding: 10px 20px;
+        padding: 5px 30px;
+        border-radius: 10px;
     }
     .tariff__info-price {
         font-size: 18px;
@@ -2099,8 +2299,19 @@ header {
     .tariffs__subtitle,
     .tariffs__tabs a,
     .agitation__subtitle,
-    .prediction__item-text {
+    .prediction__item-text,
+    .tariff__info-title,
+    .tariff__info-desc,
+    .supervisor__info-experience,
+    .supervisor__info,
+    .supervisor__inner ul {
         font-size: 12px;
+    }
+    .supervisor__inner {
+        text-align: center;
+    }
+    .supervisor__info-experience {
+        margin-bottom: 2rem;
     }
     .team__info-card .team__card-title span {
         font-size: 32px;
@@ -2108,9 +2319,29 @@ header {
     .team__card-text {
         font-size: 10px;
     }
-    .tariff__info-item {
+    .tariff__info-link {
+        margin-bottom: 15px;
+    }
+    .tariff__info ul {
+        margin-bottom: 25px;
+        line-height: 20px;
+    }
+    .agitation {
+        margin-bottom: 15px;
+    }
+    .steps {
+        margin-bottom: 7rem;
+    }
+    .tariff__info-btn {
+        width: 100%;
+    }
+    .agitation__title {
+        padding-top: 70px;
+    }
+    .tariff__bottom-card .tariff__info-item {
         font-size: 1.2rem;
         width: 100%;
+        margin-bottom: 5px;
     }
     .support__card {
         text-align: center;
@@ -2156,9 +2387,6 @@ header {
         .footer__socials {
             margin-right: 0;
         }
-        .footer__logo {
-            margin-bottom: 10px;
-        }
         .footer__bottom-right {
             a {
                 display: inline-block;
@@ -2168,7 +2396,7 @@ header {
         .footer__desc {
             display: block;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
     }
     .footer__bottom-left {
@@ -2192,6 +2420,9 @@ header {
     .agitation__inner {
         padding: 0px 20px;
     }
+    .footer__bottom .footer__bottom-inner {
+        padding: 0px 0px 0px 0px;
+    }
     .agitation {
         height: 290px;
     }
@@ -2205,6 +2436,19 @@ header {
     .round__particle {
         top: 256px;
         right: -65px;
+    }
+    .round__particle {
+        animation: particle1 9s infinite;
+        &.small {
+            animation: particle2 9s infinite;
+        }
+        &.small2 {
+            animation: particle1 15 s infinite;
+        }
+    }
+    .round__particle.big {
+        width: 102.61px;
+        height: 102.61px;
     }
     .team__info-card,
     .team__cards-row:first-child .team__info-card:nth-child(2),
@@ -2222,11 +2466,12 @@ header {
     .team__cards-row:nth-child(2) .team__info-card:nth-child(2) .team__card-title,
     .tariff__info-link,
     .tariff__info-btn,
-    .agitation__btn {
+    .agitation__btn,
+    .tariff__info-item {
         font-size: 12px;
     }
-    .team__cards-row:first-child .team__info-card:nth-child(2),
-    .team__cards-row:nth-child(2) .team__info-card:nth-child(2) {
+    .team__cards-row:first-child .team__info-card:nth-child(2)._active,
+    .team__cards-row:nth-child(2) .team__info-card:nth-child(2)._active {
         transform: translateY(15px);
     }
     .support__card-text {
@@ -2337,6 +2582,25 @@ header {
                 height: 23px;
             }
         }
+    }
+    .popup__title {
+        font-size: 16px;
+    }
+    .popup__close {
+        top: 16px;
+        right: 16px;
+    }
+    .popup .popup__inner {
+        padding: 60px 20px;
+        input {
+            font-size: 12px;
+            background-size: 18px 18px;
+        }
+    }
+    .popup-btn {
+        font-size: 12px;
+        width: 100%;
+        text-align: center;
     }
     .prediction__inner .prediction__title {
         max-width: 180px;
