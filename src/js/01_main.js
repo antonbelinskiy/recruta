@@ -204,7 +204,7 @@ function bodylock() {
     unlock = false
     setTimeout(function() {
         unlock = true
-    }, timeout)
+    }, 500)
 }
 
 function bodyUnlock() {
@@ -221,7 +221,7 @@ function bodyUnlock() {
     unlock = false
     setTimeout(function() {
         unlock = true
-    }, timeout)
+    }, 500)
 }
 
 document.addEventListener('keydown', function(e) {
